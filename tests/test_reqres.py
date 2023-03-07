@@ -1,6 +1,6 @@
 import allure
-# from schemas.user import *
-# from pytest_voluptuous import S
+from schemas.user import *
+from pytest_voluptuous import S
 
 
 def test_create_user(reqres):
@@ -10,7 +10,7 @@ def test_create_user(reqres):
         create_user = reqres.post('api/users', {'name': name, 'job': job})
 
         assert create_user.status_code == 201
-        # assert create_user.json() == S(user.create_single_user)
+        assert create_user.json() == S(create_single_user)
         assert create_user.json()['name'] == name
         assert create_user.json()['job'] == job
 
@@ -22,7 +22,7 @@ def test_update_user(reqres):
         update_user = reqres.put('api/users/2', {'name': update_name, 'job': update_job})
 
         assert update_user.status_code == 200
-        # assert update_user.json() == S(user.update_single_user)
+        assert update_user.json() == S(update_single_user)
         assert update_user.json()['name'] == update_name
         assert update_user.json()['job'] == update_job
 
